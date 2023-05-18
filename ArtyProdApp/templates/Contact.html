@@ -1,0 +1,234 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="../media/favicon.png" type="">
+
+  <title>{% block title %} ArtyProd {% endblock %}</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="{% static 'css/bootstrap.css'%}">
+
+  <!--owl slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <!-- nice select  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="{% static 'css/font-awesome.min.css'%}">
+      <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="{% static 'css/style.css'%}">
+      <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="{% static 'css/responsive.css'%}">
+    {% block styles %} {% endblock %}
+
+</head>
+
+<body class="sub_page">
+
+  <div class="hero_area">
+    <div class="bg-box">
+      <img src="{% static 'media/hero-bg.jpg' %}" alt="">
+    </div>
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+            <a class="navbar-brand" href="{% url 'Portfolio' %}">
+                <span>
+                  ArtyProd
+                </span>
+              </a>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav  mx-auto ">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'Portfolio' %}">Home </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'Projects' %}">Portfolio</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'Services' %}">Services</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'Personnel' %}">Team</a>
+                  </li>
+                  {%if user.is_authenticated%}
+                  <li class="nav-item">
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{user.username}}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item" href="{% url 'myprojects' %}">Your Projects</a></li>
+                            <li><a class="dropdown-item" href="{% url 'Contact' %}">Contact</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/logout">logout</a></li>
+                        </ul>
+                    </div>
+                  </li>
+                </ul>
+                <div class="user_option">
+                  <a href="{% url 'Project' %}" class="order_online">
+                    Create Project
+                  </a>
+                </div>
+                  {% else %}
+                </ul>
+                  <div class="user_option">
+                  <a href="{% url 'Login' %}" class="order_online">
+                    Login
+                  </a>
+                </div>
+                    {% endif %} 
+              </div>
+            </nav>
+          </div>
+        </header>
+    <!-- end header section -->
+  </div>
+
+  <!-- book section -->
+  <section class="book_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          Contact Us
+        </h2>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form_container">
+            <form action="contact" method="POST">
+              {% csrf_token%}
+              {{ form.as_p }}
+              <div class="btn_box">
+                <button type="submit">
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end book section -->
+
+ <!-- footer section -->
+ <footer class="footer_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 footer-col">
+        <div class="footer_contact">
+          <h4>
+            Contact Us
+          </h4>
+          <div class="contact_link_box">
+            <a href="{% url 'Contact' %}">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              <span>
+                Go to our contact page
+              </span>
+            </a>
+              <span>
+                Or simply send us an email at
+              </span>
+            <a>
+              <span>
+                ArtyProd@gmail.com
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 footer-col">
+        <div class="footer_detail">
+          <a href="" class="footer-logo">
+            ArtyProd
+          </a>
+          <p>
+            The best website to make your dream project come true
+          </p>
+          <div class="footer_social">
+            <a href="">
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-twitter" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-instagram" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 footer-col">
+        <h4>
+          Our Working Time
+        </h4>
+        <p>
+          24/7
+        </p>
+        <p>
+          7 days a week
+        </p>
+        <p>
+          365 days a year
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- footer section -->
+
+
+  <!-- jQery -->
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <!-- popper js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <!-- bootstrap js -->
+  <script src="{% static 'js/bootstrap.js' %}"></script>
+  <!-- owl slider -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+  </script>
+  <!-- isotope js -->
+  <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
+  <!-- nice select -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+  <!-- custom js -->
+  <script src="{% static 'js/custom.js' %}"></script>
+  <!-- Google Map -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI-callback=myMap">
+  </script>
+  <!-- End Google Map -->
+  <script>
+    $(document).ready(function () {
+        $('.dropdown-toggle').dropdown();
+    });
+</script>
+
+</body>
+
+</html>

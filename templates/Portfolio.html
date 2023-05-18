@@ -1,0 +1,453 @@
+{% load static %}
+{% load mathfilters %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="media/favicon.png" type="">
+
+  <title>{% block title %} ArtyProd {% endblock %}</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="{% static 'css/bootstrap.css'%}">
+
+  <!--owl slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <!-- nice select  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="{% static 'css/font-awesome.min.css'%}">
+      <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="{% static 'css/style.css'%}">
+      <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="{% static 'css/responsive.css'%}">
+    {% block styles %} {% endblock %}
+
+</head>
+
+<body>
+
+  <div class="hero_area">
+    <div class="bg-box">
+      <img src="{% static "media/hero-bg.jpg" %}" alt="home" />
+    </div>
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="{% url 'Portfolio' %}">
+            <span>
+              ArtyProd
+            </span>
+          </a>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav  mx-auto ">
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'Portfolio' %}">Home<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'Projects' %}">Portfolio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'Services' %}">Services</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'Personnel' %}">Team</a>
+              </li>
+              {%if user.is_authenticated%}
+              <li class="nav-item">
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{user.username}}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="{% url 'myprojects' %}">Your Projects</a></li>
+                        <li><a class="dropdown-item" href="{% url 'Contact' %}">Contact</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/logout">logout</a></li>
+                    </ul>
+                </div>
+              </li>
+            </ul>
+            <div class="user_option">
+              <a href="{% url 'Project' %}" class="order_online">
+                Create Project
+              </a>
+            </div>
+              {% else %}
+            </ul>
+              <div class="user_option">
+              <a href="{% url 'Login' %}" class="order_online">
+                Login
+              </a>
+            </div>
+                {% endif %} 
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+    <!-- slider section -->
+    <section class="slider_section ">
+      <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="container ">
+              <div class="row">
+                <div class="col-md-7 col-lg-6 ">
+                  <div class="detail-box">
+                    <h1>
+                      Your Desired Project
+                    </h1>
+                    <p>
+                      Find or create whatever project that you may desire.<br/>
+                      All with just a click of a button.
+                    </p>
+                    <div class="btn-box">
+                      <a href="{% url 'Projects' %}" class="btn1">
+                        Browse Our Portfolio
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+    <!-- end slider section -->
+  </div>
+
+  <!-- food section -->
+  <br/>
+  <section class="food_section layout_padding-bottom">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          Our Services
+        </h2>
+      </div>
+      <div class="filters-content">
+        <div class="row grid">
+          <div class="col-sm-6 col-lg-4 all pizza">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="{% static "media/3d.jpg" %}" alt="" />
+                </div>
+                <div class="detail-box">
+                  <h5>
+                    3D Modeling
+                  </h5>
+                  <p>
+                    3D modeling is the process of creating a three-dimensional digital representation of an object or environment using specialized software.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all burger">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="{% static "media/chart-design_P1_900x420.avif" %}" alt="" />
+                </div>
+                <div class="detail-box">
+                  <h5>
+                    Graphique charts
+                  </h5>
+                  <p>
+                    Graphique charts, also known as line charts, are a type of graphical representation that displays information as a series of data points connected by straight lines.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all pizza">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="{% static "media/script-writing-for-films-1.jpg" %}" alt="" />
+                </div>
+                <div class="detail-box">
+                  <h5>
+                    Scriptwriting
+                  </h5>
+                  <p>
+                    Screenwriting is the art of writing scripts and stories for visual media, such as movies, TV shows, documentaries, or even video games.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end food section -->
+
+  <!-- about section -->
+  <br/>
+  <section class="about_section layout_padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 ">
+          <div class="img-box">
+            <img src="{% static "media/about.png" %}" alt="">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="detail-box">
+            <div class="heading_container">
+              <h2>
+                We Are ArtyProd
+              </h2>
+            </div>
+            <p>
+              Introducing a new website that is designed to help people create their desired project. 
+              Whether you are an entrepreneur, artist, student, or just someone with a passion project, 
+              this website provides a platform to help you bring your ideas to life. With a user-friendly interface, 
+              you can easily navigate through the website and access a wide range of resources and tools to help you plan, 
+              design, and execute your project. From creating a project timeline to finding collaborators and funding, 
+              this website has everything you need to make your project a success. So, if you have a project idea in mind 
+              and want to bring it to fruition, look no further than this website to help you get started.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end about section -->
+
+  <!-- offer section -->
+
+  <section class="offer_section layout_padding-bottom">
+    <div class="offer_container">
+      <div class="container ">
+        <div class="heading_container heading_center">
+          <h2>
+            Our Team
+          </h2>
+        </div>
+        <div class="row">
+          <div class="col-md-6  ">
+            <div class="box ">
+              <div class="img-box">
+                <img src="{% static "media/moetaz.jpg" %}" alt="" />
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Moetaz
+                </h5>
+                <h6>
+                  Specialty: 3D Modeling, Graphic charts,<br>
+                  Years Of Experience: 5
+                </h6>
+                <div class="user_option">
+                  <a href="https://www.linkedin.com/">
+                    Visit Linkedin
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6  ">
+            <div class="box ">
+              <div class="img-box">
+                <img src="{% static "media/farah.jpg" %}" alt="" />
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Farah
+                </h5>
+                <h6>
+                  Specialty: 3D Modeling, Graphic charts,<br>
+                  Years Of Experience: 4
+                </h6>
+                <div class="user_option">
+                  <a href="https://www.linkedin.com/">
+                    Visit Linkedin
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6  ">
+            <div class="box ">
+              <div class="img-box">
+                <img src="{% static "media/basma.jpg" %}" alt="" />
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Basma
+                </h5>
+                <h6>
+                  Specialty: Scriptwriting,<br>
+                  Years Of Experience: 10
+                </h6>
+                <div class="user_option">
+                  <a href="https://www.linkedin.com/">
+                    Visit Linkedin
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6  ">
+            <div class="box ">
+              <div class="img-box">
+                <img src="{% static "media/ali.jpg" %}" alt="" />
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Ali
+                </h5>
+                <h6>
+                  Specialty: Graphic charts,<br>
+                  Years Of Experience: 7
+                </h6>
+                <div class="user_option">
+                  <a href="https://www.linkedin.com/">
+                    Visit Linkedin
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </br>
+    </br>
+    <div class="container">
+      <div class="heading_container heading_center">
+        <div class="user_option">
+          <a href="{% url 'Personnel' %}" class="order_online">
+            View the rest of our team
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end offer section -->
+
+  <!-- footer section -->
+  <footer class="footer_section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 footer-col">
+          <div class="footer_contact">
+            <h4>
+              Contact Us
+            </h4>
+            <div class="contact_link_box">
+              <a href="{% url 'Contact' %}">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span>
+                  Go to our contact page
+                </span>
+              </a>
+                <span>
+                  Or simply send us an email at
+                </span>
+              <a>
+                <span>
+                  ArtyProd@gmail.com
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 footer-col">
+          <div class="footer_detail">
+            <a href="" class="footer-logo">
+              ArtyProd
+            </a>
+            <p>
+              The best website to make your dream project come true
+            </p>
+            <div class="footer_social">
+              <a href="">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-instagram" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 footer-col">
+          <h4>
+            Our Working Time
+          </h4>
+          <p>
+            24/7
+          </p>
+          <p>
+            7 days a week
+          </p>
+          <p>
+            365 days a year
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- footer section -->
+
+  <!-- jQery -->
+  <script src="static/js/jquery-3.4.1.min.js"></script>
+  <!-- popper js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <!-- bootstrap js -->
+  <script src="static\js\bootstrap.js"></script>
+  <!-- owl slider -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+  </script>
+  <!-- isotope js -->
+  <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
+  <!-- nice select -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+  <!-- custom js -->
+  <script src="static/js/custom.js"></script>
+  <!-- Google Map -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI-callback=myMap">
+  </script>
+  <!-- End Google Map -->
+  <script>
+    $(document).ready(function () {
+        $('.dropdown-toggle').dropdown();
+    });
+</script>
+
+</body>
+
+</html>
