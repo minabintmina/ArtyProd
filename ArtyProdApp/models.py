@@ -44,7 +44,7 @@ class Project(models.Model):
     CHOICE=(("C","Completed"),
             ("I","In-progress"),
             )
-    status=models.CharField(max_length=1, choices=CHOICE)
+    status=models.CharField(max_length=1, choices=CHOICE, default="I")
     team = models.ForeignKey(Team, on_delete=models.CASCADE, null=True)
     sender_username = models.CharField(max_length=150, blank=True)
 

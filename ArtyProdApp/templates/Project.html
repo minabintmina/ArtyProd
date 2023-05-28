@@ -136,12 +136,21 @@
             Contact Us
           </h4>
           <div class="contact_link_box">
-            <a href="{% url 'Contact' %}">
-              <i class="fa fa-map-marker" aria-hidden="true"></i>
-              <span>
-                Go to our contact page
-              </span>
-            </a>
+            {%if user.is_authenticated%}
+                <a href="{% url 'Contact' %}">
+                  <i class="fa fa-map-marker" aria-hidden="true"></i>
+                  <span>
+                    Go to our contact page
+                  </span>
+                </a>
+              {%else%}
+                <a href="{% url 'Login' %}">
+                  <i class="fa fa-map-marker" aria-hidden="true"></i>
+                  <span>
+                    Go to our contact page
+                  </span>
+                </a>
+                {%endif%}
               <span>
                 Or simply send us an email at
               </span>
